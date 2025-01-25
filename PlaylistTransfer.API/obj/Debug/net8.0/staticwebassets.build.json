@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "V6OapOsGavkcVEUfpK814NLgVuNwM+abtD5DOvHBcwA=",
+  "Source": "PlaylistTransfer.API",
+  "BasePath": "_content/PlaylistTransfer.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

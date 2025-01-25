@@ -1,0 +1,20 @@
+﻿<Properties StartupConfiguration="{C9CC5D50-19C9-4D19-AD45-7BBBB4A8FCAC}|https">
+  <MonoDevelop.Ide.ItemProperties.PlaylistTransfer.UI PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="PlaylistTransfer.UI" expanded="True" selected="True">
+            <Node name="PlaylistTransfer.UI" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

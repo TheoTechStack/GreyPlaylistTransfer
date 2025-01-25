@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/PlaylistTransfer.API.props" />
+</Project>
