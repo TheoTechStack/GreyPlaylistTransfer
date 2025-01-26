@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+labQaju0O7G6SVWoNlqnhzDMR4ktOOlOjS+IgzWvUQ/rvqIv1KeGhpzPwcXY18OkEvSvFwtaanNQNI8+N5jwA==",
+  "dgSpecHash": "v78uo84wcDHtl+RbFR4EzS96fDWox20Kszo0Adc6lfX+tawQINGPvCRrD/WCxrUWxlqL+EybJqURdKHRbu50yQ==",
   "success": true,
-  "projectFilePath": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj",
+  "projectFilePath": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

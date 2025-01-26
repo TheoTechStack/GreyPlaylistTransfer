@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.UI/PlaylistTransfer.UI.csproj",
+      "projectUniqueName": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/PlaylistTransfer.UI.csproj",
       "projectName": "PlaylistTransfer.UI",
-      "projectPath": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.UI/PlaylistTransfer.UI.csproj",
+      "projectPath": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/PlaylistTransfer.UI.csproj",
       "packagesPath": "/Users/theoramalatso/.nuget/packages/",
-      "outputPath": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.UI/obj/",
+      "outputPath": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/theoramalatso/.nuget/NuGet/NuGet.Config"
@@ -51,8 +51,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj": {
-              "projectPath": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj"
+            "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj": {
+              "projectPath": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj"
             }
           }
         }

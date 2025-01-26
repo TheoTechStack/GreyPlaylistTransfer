@@ -9,9 +9,9 @@ namespace PlaylistTransfer.API.Controllers;
 public class SpotifyController(SpotifyService spotifyService) : ControllerBase
 {
     [HttpGet("")]
-    public IActionResult GetAuthUrl()
+    public async Task<IActionResult> GetAuthUrl()
     {
-        var url = spotifyService.GenerateAuthUrl();
+        var url = await spotifyService.GenerateAuthUrl();
         return Ok(new { Url = url });
     }
     
@@ -24,10 +24,7 @@ public class SpotifyController(SpotifyService spotifyService) : ControllerBase
         }
         try
         {
-            // Exchange the code for an access token
             var accessToken = await spotifyService.ExchangeCodeForTokenAsync(code);
-
-            // Send the access token as a response or store it
             return Ok(new { AccessToken = accessToken });
         }
         catch (Exception ex)

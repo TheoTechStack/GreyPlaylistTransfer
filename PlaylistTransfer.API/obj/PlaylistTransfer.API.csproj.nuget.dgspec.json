@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.API/PlaylistTransfer.API.csproj": {}
+    "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/PlaylistTransfer.API.csproj": {}
   },
   "projects": {
-    "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.API/PlaylistTransfer.API.csproj": {
+    "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/PlaylistTransfer.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.API/PlaylistTransfer.API.csproj",
+        "projectUniqueName": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/PlaylistTransfer.API.csproj",
         "projectName": "PlaylistTransfer.API",
-        "projectPath": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.API/PlaylistTransfer.API.csproj",
+        "projectPath": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/PlaylistTransfer.API.csproj",
         "packagesPath": "/Users/theoramalatso/.nuget/packages/",
-        "outputPath": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.API/obj/",
+        "outputPath": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/theoramalatso/.nuget/NuGet/NuGet.Config"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj": {
-                "projectPath": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj"
+              "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj": {
+                "projectPath": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj"
               }
             }
           }
@@ -42,6 +42,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.13.2, )"
+            },
+            "Azure.Security.KeyVault.Secrets": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.7, )"
@@ -78,14 +86,14 @@
         }
       }
     },
-    "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj": {
+    "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj",
+        "projectUniqueName": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj",
         "projectName": "PlaylistTransfer.Shared",
-        "projectPath": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj",
+        "projectPath": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj",
         "packagesPath": "/Users/theoramalatso/.nuget/packages/",
-        "outputPath": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/obj/",
+        "outputPath": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/theoramalatso/.nuget/NuGet/NuGet.Config"

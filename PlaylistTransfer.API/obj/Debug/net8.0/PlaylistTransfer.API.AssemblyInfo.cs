@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PlaylistTransfer.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+24531927caa00daa5e57ada385c5b87b8c3c73ab")]
 [assembly: System.Reflection.AssemblyProductAttribute("PlaylistTransfer.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PlaylistTransfer.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

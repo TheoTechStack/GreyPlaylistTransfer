@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj",
+      "projectUniqueName": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj",
       "projectName": "PlaylistTransfer.Shared",
-      "projectPath": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj",
+      "projectPath": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/PlaylistTransfer.Shared.csproj",
       "packagesPath": "/Users/theoramalatso/.nuget/packages/",
-      "outputPath": "/Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/obj/",
+      "outputPath": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/theoramalatso/.nuget/NuGet/NuGet.Config"

@@ -4,12 +4,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services
 builder.Services.AddControllers();
-builder.Services.AddSingleton<SpotifyService>();
+builder.Services.AddSingleton(_ => 
+    new AzureKeyVaultService(builder.Configuration["AzureKeyVaultUri"]));
+builder.Services.AddScoped<SpotifyCredentialsProvider>();
+builder.Services.AddScoped<SpotifyService>();
 
 
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

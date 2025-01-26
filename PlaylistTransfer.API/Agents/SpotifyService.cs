@@ -5,12 +5,13 @@ using SpotifyAPI.Web;
 
 namespace PlaylistTransfer.API.Agents;
 
-public class SpotifyService
+public class SpotifyService(SpotifyCredentialsProvider spotifyCredentialsProvider, IConfiguration configuration)
 {
-    //Azure KeyValut
-    private const string ClientSecret = ""; 
-    private const string ClientId = ""; 
-    private const string RedirectUrl = "http://localhost:5095/api/Spotify/GetAccessToken";
+    private string _clientSecret = string.Empty; 
+    private string _clientId = string.Empty; 
+    private readonly string _redirectUrl = configuration["SpotifyRedirectUrl"]  ??
+                                           throw new ArgumentNullException(nameof(configuration), 
+                                               message: "SpotifyRedirectUrl is missing in configuration.");
 
     private readonly string[] _scopes =
     [
@@ -20,13 +21,14 @@ public class SpotifyService
         "playlist-read-collaborative"
     ];
 
-    public string GenerateAuthUrl()
+    public async Task<string> GenerateAuthUrl()
     {
+        (_clientId, _clientSecret) = await spotifyCredentialsProvider.GetSpotifyCredentialsAsync();
         var queryParams = new Dictionary<string, string>(5)
         {
             { "response_type", "code" },
-            { "client_id", ClientId },
-            { "redirect_uri", RedirectUrl },
+            { "client_id", _clientId },
+            { "redirect_uri", _redirectUrl },
             { "scope", string.Join(" ", _scopes) }
         };
 
@@ -35,7 +37,8 @@ public class SpotifyService
 
     public async Task<string?> ExchangeCodeForTokenAsync(string code)
     {
-        var authHeaderValue = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{ClientId}:{ClientSecret}"));
+        (_clientId, _clientSecret) = await spotifyCredentialsProvider.GetSpotifyCredentialsAsync();
+        var authHeaderValue = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{_clientId}:{_clientSecret}"));
         using var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Authorization", $"Basic {authHeaderValue}");
 
@@ -43,7 +46,7 @@ public class SpotifyService
         {
             new KeyValuePair<string, string>("grant_type", "authorization_code"),
             new KeyValuePair<string, string>("code", code),
-            new KeyValuePair<string, string>("redirect_uri", RedirectUrl)
+            new KeyValuePair<string, string>("redirect_uri", _redirectUrl)
         });
 
         var response = await httpClient.PostAsync("https://accounts.spotify.com/api/token", formData);
@@ -69,16 +72,14 @@ public class SpotifyService
             if (playlistId == null) continue;
 
             var detailedPlaylist = await spotifyClient.Playlists.Get(playlistId);
-        
-            // Initialize the list for this playlist's tracks
+            
             var playlistTracks = new List<object>();
 
             foreach (var item in detailedPlaylist.Tracks!.Items!)
             {
                 if (item.Track is not FullTrack track) continue;
                 var artistNames = string.Join(", ", track.Artists.Select(artist => artist.Name));
-
-                // Add the track to the playlistTracks list
+                
                 playlistTracks.Add(new
                 {
                     TrackName = $"{track.Name} by {artistNames}",

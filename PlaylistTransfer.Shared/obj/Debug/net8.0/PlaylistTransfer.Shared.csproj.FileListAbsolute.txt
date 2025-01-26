@@ -9,3 +9,15 @@
 /Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/obj/Debug/net8.0/refint/PlaylistTransfer.Shared.dll
 /Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/obj/Debug/net8.0/PlaylistTransfer.Shared.pdb
 /Users/theoramalatso/CODE/PlaylistTransferSolution/PlaylistTransfer.Shared/obj/Debug/net8.0/ref/PlaylistTransfer.Shared.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/bin/Debug/net8.0/PlaylistTransfer.Shared.deps.json
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/bin/Debug/net8.0/PlaylistTransfer.Shared.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/bin/Debug/net8.0/PlaylistTransfer.Shared.pdb
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/obj/Debug/net8.0/PlaylistTransfer.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/obj/Debug/net8.0/PlaylistTransfer.Shared.AssemblyInfoInputs.cache
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/obj/Debug/net8.0/PlaylistTransfer.Shared.AssemblyInfo.cs
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/obj/Debug/net8.0/PlaylistTransfer.Shared.csproj.CoreCompileInputs.cache
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/obj/Debug/net8.0/PlaylistTransfer.Shared.sourcelink.json
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/obj/Debug/net8.0/PlaylistTransfer.Shared.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/obj/Debug/net8.0/refint/PlaylistTransfer.Shared.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/obj/Debug/net8.0/PlaylistTransfer.Shared.pdb
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.Shared/obj/Debug/net8.0/ref/PlaylistTransfer.Shared.dll
