@@ -22,6 +22,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/Pages/AppleMusic.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXBwbGVNdXNpYy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -32,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/Pages/Playlists.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGxheWxpc3RzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/Shared/SurveyPrompt.razor]

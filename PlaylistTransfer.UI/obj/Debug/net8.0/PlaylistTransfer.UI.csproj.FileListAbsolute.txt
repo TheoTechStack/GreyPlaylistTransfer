@@ -34,3 +34,5 @@
 /Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/obj/Debug/net8.0/PlaylistTransfer.UI.pdb
 /Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/obj/Debug/net8.0/PlaylistTransfer.UI.genruntimeconfig.cache
 /Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/obj/Debug/net8.0/ref/PlaylistTransfer.UI.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/bin/Debug/net8.0/AutoFixture.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/bin/Debug/net8.0/Fare.dll

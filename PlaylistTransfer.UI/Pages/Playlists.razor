@@ -1,0 +1,81 @@
+@page "/playlists"
+@using AutoFixture
+@using PlaylistTransfer.UI.Data
+@inject NavigationManager Navigation
+@inject PlaylistState PlaylistState
+
+<h3>Spotify Playlists</h3>
+
+@if (playlists == null)
+{
+    <p>Loading playlists...</p>
+}
+else if (playlists.Count == 0)
+{
+    <p>No playlists found.</p>
+}
+else
+{
+    <ul>
+        @foreach (var playlist in playlists)
+        {
+            <li>
+                <input type="checkbox" @bind="playlist.IsSelected" />
+                <span class="playlist-name" @onclick="() => TogglePlaylistDetails(playlist.PlaylistId)">
+                    @playlist.PlaylistName
+                </span>
+                @if (playlist.ShowDetails)
+                {
+                    <ul>
+                        @foreach (var song in playlist.Songs)
+                        {
+                            <li>@song.SongName by @song.ArtistName</li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    </ul>
+    <button class="btn btn-primary" @onclick="ProceedToAppleMusic">Post to Apple Music</button>
+}
+
+@code {
+    private List<PlaylistDto> playlists;
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var fixture = new Fixture();
+            PlaylistDto playlistfix = fixture.Create<PlaylistDto>();
+            var playlistList = new List<PlaylistDto> { playlistfix };
+            playlists = playlistList;
+           
+           PlaylistState.SelectedPlaylists.Add(playlistfix);
+
+            //playlists = await Http.GetFromJsonAsync<List<PlaylistDto>>("api/Spotify/Playlists");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching playlists: {ex.Message}");
+        }
+    }
+
+    private void TogglePlaylistDetails(string playlistId)
+    {
+        var playlist = playlists.FirstOrDefault(p => p.PlaylistId == playlistId);
+        if (playlist != null)
+        {
+            playlist.ShowDetails = !playlist.ShowDetails;
+        }
+    }
+
+    private void ProceedToAppleMusic()
+    {
+        PlaylistState.SelectedPlaylists = playlists.Where(p => p.IsSelected).ToList();
+        Navigation.NavigateTo("/apple-music", true);
+    }
+    
+
+}
