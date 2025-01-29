@@ -66,3 +66,60 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+.playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Ensures 5 playlists per row on desktop */
+    gap: 15px; /* Space between cards */
+    padding: 20px;
+    justify-content: center; /* Centers the grid */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .playlist-grid {
+        grid-template-columns: repeat(2, 1fr); /* Shows 2 playlists per row on tablets */
+        gap: 10px; /* Smaller gap on mobile */
+    }
+
+    .playlist-image {
+        max-width: 120px; /* Slightly smaller images on mobile */
+    }
+}
+
+/* Small screens (e.g. mobile) */
+@media (max-width: 480px) {
+    .playlist-grid {
+        grid-template-columns: 1fr; /* 1 playlist per row on mobile */
+        gap: 10px; /* Smaller gap on mobile */
+    }
+
+    .playlist-image {
+        max-width: 100px; /* Even smaller images on small screens */
+    }
+}
+
+.playlist-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.playlist-card:hover {
+    transform: scale(1.05); /* Small zoom effect on hover */
+}
+
+.playlist-image {
+    width: 100%; /* Make sure images take full width of the card */
+    max-width: 150px; /* Adjust image size */
+    height: auto;
+    border-radius: 10px;
+}
+
+.playlist-info {
+    margin-top: 8px;
+}

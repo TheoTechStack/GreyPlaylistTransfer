@@ -1,0 +1,12 @@
+<div class="playlist-card">
+    <img src="@Playlist.ImageUrl" alt="@Playlist.PlaylistName" class="playlist-image" />
+    <div class="playlist-info">
+        <h5>@Playlist.PlaylistName</h5>
+        <input type="checkbox" @bind="Playlist.IsSelected" />
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public PlaylistDto Playlist { get; set; } = new();
+}

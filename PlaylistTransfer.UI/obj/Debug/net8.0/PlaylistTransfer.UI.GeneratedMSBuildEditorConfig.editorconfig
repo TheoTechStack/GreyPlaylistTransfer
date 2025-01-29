@@ -38,6 +38,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/Pages/PlaylistCard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGxheWxpc3RDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/Pages/Playlists.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGxheWxpc3RzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
