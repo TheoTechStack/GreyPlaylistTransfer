@@ -5,5 +5,5 @@ namespace PlaylistTransfer.UI.Data;
 public class PlaylistState
 {
     
-    public static List<PlaylistDto> SelectedPlaylists { get; set; } = new List<PlaylistDto>();
+    public static List<PlaylistItems> SelectedPlaylists { get; set; } = [];
 }

@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.WebUtilities;
+using PlaylistTransfer.Shared;
 using SpotifyAPI.Web;
 
 namespace PlaylistTransfer.API.Agents;
@@ -58,12 +59,12 @@ public class SpotifyService(SpotifyCredentialsProvider spotifyCredentialsProvide
         return jsonResponse.RootElement.GetProperty("access_token").GetString();
     }
 
-    public async Task<List<object>> GetPlaylistsAsync(string accessToken)
+    public async Task<List<PlaylistItems>> GetPlaylistsAsync(string accessToken)
     {
         var spotifyClient = new SpotifyClient(accessToken);
         var playlists = await spotifyClient.Playlists.CurrentUsers();
 
-        var result = new List<object>();
+        var result = new List<PlaylistItems>();
 
         foreach (var playlist in playlists.Items!)
         {
@@ -90,11 +91,12 @@ public class SpotifyService(SpotifyCredentialsProvider spotifyCredentialsProvide
             // If there are tracks, add the playlist with its tracks to the result
             if (playlistTracks.Count != 0)
             {
-                result.Add(new
-                {
-                    PlaylistName = playlist.Name,
-                    Tracks = playlistTracks
-                });
+                result.Add(new PlaylistItems
+                (
+                     playlist.Name,
+                     playlistTracks,
+                    playlist.Images!.Select(item => item.Url).FirstOrDefault()
+                ));
             }
         }
 

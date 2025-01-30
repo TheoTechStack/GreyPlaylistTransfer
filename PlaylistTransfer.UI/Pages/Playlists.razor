@@ -1,23 +1,25 @@
 @page "/playlists"
 @using AutoFixture
+@using PlaylistTransfer.Shared
 @using PlaylistTransfer.UI.Data
 @inject NavigationManager Navigation
 @inject PlaylistState PlaylistState
+@inject HttpClient Http
 
 <h3>Spotify Playlists</h3>
 
-@if (playlists == null)
+@if (_playlists == null)
 {
     <p>Loading playlists...</p>
 }
-else if (playlists.Count == 0)
+else if (_playlists.Count == 0)
 {
     <p>No playlists found.</p>
 }
 else
 {
     <div class="playlist-grid">
-        @foreach (var playlist in playlists)
+        @foreach (var playlist in _playlists)
         {
             <PlaylistCard Playlist="playlist" />
         }
@@ -26,7 +28,7 @@ else
 }
 
 @code {
-    private List<PlaylistDto> playlists;
+    private List<PlaylistItems> _playlists = null!;
     
 
     protected override async Task OnInitializedAsync()
@@ -39,23 +41,38 @@ else
             // var playlistList = new List<PlaylistDto> { playlistfix };
             // playlists = playlistList;
             
-            playlists = new List<PlaylistDto>
-            {
-                new PlaylistDto { PlaylistId = "1", PlaylistName = "My Playlist 1", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = true },
-                new PlaylistDto { PlaylistId = "2", PlaylistName = "My Playlist 2", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-                new PlaylistDto { PlaylistId = "3", PlaylistName = "My Playlist 3", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-                new PlaylistDto { PlaylistId = "4", PlaylistName = "My Playlist 4", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-                new PlaylistDto { PlaylistId = "5", PlaylistName = "My Playlist 5", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-                new PlaylistDto { PlaylistId = "6", PlaylistName = "My Playlist 6", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-                new PlaylistDto { PlaylistId = "7", PlaylistName = "My Playlist 7", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-                new PlaylistDto { PlaylistId = "8", PlaylistName = "My Playlist 8", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-                new PlaylistDto { PlaylistId = "9", PlaylistName = "My Playlist 9", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-                new PlaylistDto { PlaylistId = "10", PlaylistName = "My Playlist 10", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false }
-            };
+            // playlists =
+            // [
+            //     new PlaylistDto { PlaylistId = "1", PlaylistName = "My Playlist 1", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = true },
+            //     new PlaylistDto { PlaylistId = "2", PlaylistName = "My Playlist 2", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
+            //     new PlaylistDto { PlaylistId = "3", PlaylistName = "My Playlist 3", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
+            //     new PlaylistDto { PlaylistId = "4", PlaylistName = "My Playlist 4", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
+            //     new PlaylistDto { PlaylistId = "5", PlaylistName = "My Playlist 5", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
+            //     new PlaylistDto { PlaylistId = "6", PlaylistName = "My Playlist 6", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
+            //     new PlaylistDto { PlaylistId = "7", PlaylistName = "My Playlist 7", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
+            //     new PlaylistDto { PlaylistId = "8", PlaylistName = "My Playlist 8", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
+            //     new PlaylistDto { PlaylistId = "9", PlaylistName = "My Playlist 9", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
+            //     new PlaylistDto { PlaylistId = "10", PlaylistName = "My Playlist 10", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false }
+            // ];
+            //_playlists = (await Http.GetFromJsonAsync<List<PlaylistItems>>("api/Spotify/Playlists"))!;
+            const string accessToken = "BQDGn94unO3mseXptyjvf26U_-DT1z0onKP6jH0R6xvUxuVbPsyN1XnQxSaRJ3YodcsKZ1WDwCcSnpYBhghXj7uIk1pfv8N0YDOvuoixIRzSuQHNXfD0K_KqFeZ4r_6f_SR5uasfywxnnaz3QMiQIUE0nPP5lUEs8HIuWup7f4O5B7mmpnVUhFvjd2rr1ipIVfhRXoPTjB5mi9HIOWloIguFcCT7w9_NTyLA7pPkSK62ot-hiSjoOLCp-A7CdCy2BFl4Xos";
+            var request = new HttpRequestMessage(HttpMethod.Get, "api/Spotify/GetPlaylists");
+            request.Headers.Add("accessToken", accessToken);
 
-            PlaylistState.SelectedPlaylists = playlists;
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                _playlists = await response.Content.ReadFromJsonAsync<List<PlaylistItems>>() ?? new();
+            }
+            else
+            {
+                Console.WriteLine($"Error: {response.StatusCode}");
+            }
+            PlaylistState.SelectedPlaylists = _playlists;
 
             //playlists = await Http.GetFromJsonAsync<List<PlaylistDto>>("api/Spotify/Playlists");
+            
+
         }
         catch (Exception ex)
         {
@@ -63,18 +80,18 @@ else
         }
     }
 
-    private void TogglePlaylistDetails(string playlistId)
-    {
-        var playlist = playlists.FirstOrDefault(p => p.PlaylistId == playlistId);
-        if (playlist != null)
-        {
-            playlist.ShowDetails = !playlist.ShowDetails;
-        }
-    }
+    // private void TogglePlaylistDetails(string playlistId)
+    // {
+    //     var playlist = playlists.FirstOrDefault(p => p.PlaylistId == playlistId);
+    //     if (playlist != null)
+    //     {
+    //         playlist.ShowDetails = !playlist.ShowDetails;
+    //     }
+    // }
 
     private void ProceedToAppleMusic()
     {
-        PlaylistState.SelectedPlaylists = playlists.Where(p => p.IsSelected).ToList();
+        PlaylistState.SelectedPlaylists = _playlists.Where(p => p.IsSelected).ToList();
         Navigation.NavigateTo("/apple-music", true);
     }
     

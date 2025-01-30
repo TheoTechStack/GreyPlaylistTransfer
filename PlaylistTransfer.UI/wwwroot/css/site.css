@@ -110,7 +110,7 @@ a, .btn-link {
 }
 
 .playlist-card:hover {
-    transform: scale(1.05); /* Small zoom effect on hover */
+    transform: scale(1.07); /* Small zoom effect on hover */
 }
 
 .playlist-image {
