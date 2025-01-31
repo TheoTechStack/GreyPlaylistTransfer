@@ -1,0 +1,65 @@
+@page "/spotify-login"
+@using Microsoft.Extensions.Caching.Memory
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IMemoryCache MemoryCache
+@using System.Text.Json
+
+<h3>Login with Spotify</h3>
+<p>Click the Spotify icon to authorize your account.</p>
+
+<button class="spotify-btn" @onclick="AuthorizeWithSpotify">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify" class="spotify-logo"/>
+</button>
+
+@code {
+private async Task AuthorizeWithSpotify()
+{
+try
+{
+    var request = new HttpRequestMessage(HttpMethod.Get, "api/Spotify/GetAuthUrl");
+    var response = await Http.SendAsync(request);
+
+    if (response.IsSuccessStatusCode)
+    {
+        var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse>();
+
+        if (!string.IsNullOrEmpty(authResponse?.Url))
+        {
+            Navigation.NavigateTo(authResponse.Url, true); // Redirect user to Spotify login
+        }
+        else
+        {
+            Console.WriteLine("Error: Spotify auth URL is empty.");
+        }
+    }
+    else
+    {
+        Console.WriteLine($"Error fetching Spotify auth URL: {response.StatusCode}");
+    }
+    
+}
+catch (Exception ex)
+{
+Console.WriteLine($"Error fetching Spotify auth URL: {ex.Message}");
+}
+}
+
+private class AuthResponse
+{
+public string Url { get; set; }
+}
+}
+
+<style>
+    .spotify-btn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .spotify-logo {
+        width: 50px;
+        height: 50px;
+    }
+</style>

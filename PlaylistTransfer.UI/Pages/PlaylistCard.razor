@@ -1,6 +1,8 @@
 @using PlaylistTransfer.Shared
 <div class="playlist-card">
-    <img src="@Playlist!.Image" alt="@Playlist.PlaylistName" class="playlist-image" />
+    <a @onclick="() => NavigateToPlaylist(Playlist)">
+        <img src="@Playlist!.Image" alt="@Playlist.PlaylistName" class="playlist-image" />
+    </a>
     <div class="playlist-info">
         <h5>@Playlist.PlaylistName</h5>
         <input type="checkbox" @bind="Playlist.IsSelected" />
@@ -10,4 +12,12 @@
 @code {
     [Parameter]
     public PlaylistItems? Playlist { get; set; }
+
+    [Inject]
+    private NavigationManager Navigation { get; set; }
+
+    private void NavigateToPlaylist(PlaylistItems playlist)
+    {
+        Navigation.NavigateTo($"/playlist/{playlist.PlaylistName}");
+    }
 }

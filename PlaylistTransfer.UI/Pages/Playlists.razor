@@ -1,99 +1,79 @@
 @page "/playlists"
 @using AutoFixture
+@using Microsoft.Extensions.Caching.Memory
 @using PlaylistTransfer.Shared
 @using PlaylistTransfer.UI.Data
 @inject NavigationManager Navigation
 @inject PlaylistState PlaylistState
 @inject HttpClient Http
+@inject IMemoryCache MemoryCache  
 
 <h3>Spotify Playlists</h3>
 
 @if (_playlists == null)
 {
-    <p>Loading playlists...</p>
+<p>Loading playlists...</p>
 }
 else if (_playlists.Count == 0)
 {
-    <p>No playlists found.</p>
+<p>No playlists found.</p>
 }
 else
 {
-    <div class="playlist-grid">
-        @foreach (var playlist in _playlists)
-        {
-            <PlaylistCard Playlist="playlist" />
-        }
-    </div>
-    <button class="btn btn-primary" @onclick="ProceedToAppleMusic">Post to Apple Music</button>
+<div class="playlist-grid">
+    @foreach (var playlist in _playlists)
+    {
+    <PlaylistCard Playlist="playlist" />
+    }
+</div>
+<button class="btn btn-primary" @onclick="ProceedToAppleMusic">Post to Apple Music</button>
 }
 
 @code {
-    private List<PlaylistItems> _playlists = null!;
-    
+private List<PlaylistItems> _playlists = null!;
+private const string CacheKey = "playlists";  // Define a cache key
+private string? accessToken;
+protected override async Task OnInitializedAsync()
+{
+try
+{
+    // Get accessToken from query string
+    var uri = Navigation.Uri;
+    var uriQuery = new Uri(uri).Query;
+    var queryParams = System.Web.HttpUtility.ParseQueryString(uriQuery);
+    accessToken = queryParams["accessToken"]; // Get the access token from the query string
+// Try to get the cached playlists if available
+if (!MemoryCache.TryGetValue(CacheKey, out _playlists))
+{
+// If cache doesn't exist, fetch playlists from the API
+var request = new HttpRequestMessage(HttpMethod.Get, "api/Spotify/GetPlaylists");
+request.Headers.Add("accessToken", accessToken);
 
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            // var fixture = new Fixture();
-            // PlaylistDto playlistfix = fixture.Create<PlaylistDto>(p => p.with;
-            //
-            // var playlistList = new List<PlaylistDto> { playlistfix };
-            // playlists = playlistList;
-            
-            // playlists =
-            // [
-            //     new PlaylistDto { PlaylistId = "1", PlaylistName = "My Playlist 1", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = true },
-            //     new PlaylistDto { PlaylistId = "2", PlaylistName = "My Playlist 2", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-            //     new PlaylistDto { PlaylistId = "3", PlaylistName = "My Playlist 3", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-            //     new PlaylistDto { PlaylistId = "4", PlaylistName = "My Playlist 4", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-            //     new PlaylistDto { PlaylistId = "5", PlaylistName = "My Playlist 5", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-            //     new PlaylistDto { PlaylistId = "6", PlaylistName = "My Playlist 6", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-            //     new PlaylistDto { PlaylistId = "7", PlaylistName = "My Playlist 7", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-            //     new PlaylistDto { PlaylistId = "8", PlaylistName = "My Playlist 8", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-            //     new PlaylistDto { PlaylistId = "9", PlaylistName = "My Playlist 9", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false },
-            //     new PlaylistDto { PlaylistId = "10", PlaylistName = "My Playlist 10", ImageUrl = "https://www.marchofdimes.org/sites/default/files/styles/4x3_small/public/2023-09/MODorg-Blog-Article-general-heart2-1200x1200.png?h=cd2a7045&itok=tCxXHPlb", IsSelected = false }
-            // ];
-            //_playlists = (await Http.GetFromJsonAsync<List<PlaylistItems>>("api/Spotify/Playlists"))!;
-            const string accessToken = "BQDGn94unO3mseXptyjvf26U_-DT1z0onKP6jH0R6xvUxuVbPsyN1XnQxSaRJ3YodcsKZ1WDwCcSnpYBhghXj7uIk1pfv8N0YDOvuoixIRzSuQHNXfD0K_KqFeZ4r_6f_SR5uasfywxnnaz3QMiQIUE0nPP5lUEs8HIuWup7f4O5B7mmpnVUhFvjd2rr1ipIVfhRXoPTjB5mi9HIOWloIguFcCT7w9_NTyLA7pPkSK62ot-hiSjoOLCp-A7CdCy2BFl4Xos";
-            var request = new HttpRequestMessage(HttpMethod.Get, "api/Spotify/GetPlaylists");
-            request.Headers.Add("accessToken", accessToken);
+var response = await Http.SendAsync(request);
+if (response.IsSuccessStatusCode)
+{
+_playlists = await response.Content.ReadFromJsonAsync<List<PlaylistItems>>() ?? new();
 
-            var response = await Http.SendAsync(request);
-            if (response.IsSuccessStatusCode)
-            {
-                _playlists = await response.Content.ReadFromJsonAsync<List<PlaylistItems>>() ?? new();
-            }
-            else
-            {
-                Console.WriteLine($"Error: {response.StatusCode}");
-            }
-            PlaylistState.SelectedPlaylists = _playlists;
+// Set the cache for 2 minutes
+MemoryCache.Set(CacheKey, _playlists, TimeSpan.FromMinutes(30));
+}
+else
+{
+Console.WriteLine($"Error: {response.StatusCode}");
+}
+}
 
-            //playlists = await Http.GetFromJsonAsync<List<PlaylistDto>>("api/Spotify/Playlists");
-            
+PlaylistState.SelectedPlaylists = _playlists;
+}
+catch (Exception ex)
+{
+Console.WriteLine($"Error fetching playlists: {ex.Message}");
+}
+}
 
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error fetching playlists: {ex.Message}");
-        }
-    }
-
-    // private void TogglePlaylistDetails(string playlistId)
-    // {
-    //     var playlist = playlists.FirstOrDefault(p => p.PlaylistId == playlistId);
-    //     if (playlist != null)
-    //     {
-    //         playlist.ShowDetails = !playlist.ShowDetails;
-    //     }
-    // }
-
-    private void ProceedToAppleMusic()
-    {
-        PlaylistState.SelectedPlaylists = _playlists.Where(p => p.IsSelected).ToList();
-        Navigation.NavigateTo("/apple-music", true);
-    }
-    
-
+private void ProceedToAppleMusic()
+{
+PlaylistState.SelectedPlaylists = _playlists.Where(p => p.IsSelected).ToList();
+Navigation.NavigateTo("/apple-music", true);
+}
 }

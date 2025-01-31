@@ -14,11 +14,17 @@
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
+
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            <NavLink class="nav-link" href="spotify-login">
+        <span>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg"
+                 alt="Spotify Login" class="spotify-logo"/>
+        </span>
+                Spotify Login
             </NavLink>
         </div>
+        
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="playlists">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch Playlist
@@ -37,3 +43,19 @@
         collapseNavMenu = !collapseNavMenu;
     }
 }
+<style>
+    .spotify-logo {
+        width: 16px;
+        height: 16px;
+        max-width: 16px; /* Prevents expansion */
+        max-height: 16px; /* Prevents expansion */
+        margin-right: 8px;
+        vertical-align: middle;
+        transition: none; /* Disables any unwanted animations */
+    }
+
+    .nav-icon img {
+        pointer-events: none; /* Prevents click interaction affecting the image */
+    }
+
+</style>

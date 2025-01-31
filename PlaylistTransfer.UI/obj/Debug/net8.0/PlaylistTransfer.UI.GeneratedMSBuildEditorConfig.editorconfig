@@ -42,8 +42,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGxheWxpc3RDYXJkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/Pages/PlaylistDetail.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGxheWxpc3REZXRhaWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/Pages/Playlists.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGxheWxpc3RzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/Pages/SpotifyLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU3BvdGlmeUxvZ2luLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/Shared/SurveyPrompt.razor]

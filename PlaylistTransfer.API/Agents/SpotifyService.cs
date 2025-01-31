@@ -1,13 +1,15 @@
 using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Caching.Memory;
 using PlaylistTransfer.Shared;
 using SpotifyAPI.Web;
 
 namespace PlaylistTransfer.API.Agents;
 
-public class SpotifyService(SpotifyCredentialsProvider spotifyCredentialsProvider, IConfiguration configuration)
+public class SpotifyService(SpotifyCredentialsProvider spotifyCredentialsProvider, IConfiguration configuration, IMemoryCache memoryCache)
 {
+    private const string CacheKey = "SpotifyAccessToken";
     private string _clientSecret = string.Empty; 
     private string _clientId = string.Empty; 
     private readonly string _redirectUrl = configuration["SpotifyRedirectUrl"]  ??
@@ -38,6 +40,10 @@ public class SpotifyService(SpotifyCredentialsProvider spotifyCredentialsProvide
 
     public async Task<string?> ExchangeCodeForTokenAsync(string code)
     {
+        if (memoryCache.TryGetValue(CacheKey, out string? cachedToken))
+        {
+            return cachedToken; // Return cached token if available
+        }
         (_clientId, _clientSecret) = await spotifyCredentialsProvider.GetSpotifyCredentialsAsync();
         var authHeaderValue = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{_clientId}:{_clientSecret}"));
         using var httpClient = new HttpClient();
@@ -56,7 +62,16 @@ public class SpotifyService(SpotifyCredentialsProvider spotifyCredentialsProvide
             throw new Exception($"Error exchanging code: {response.ReasonPhrase}");
 
         var jsonResponse = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-        return jsonResponse.RootElement.GetProperty("access_token").GetString();
+        var accessToken = jsonResponse.RootElement.GetProperty("access_token").GetString();
+
+        // Store token in cache for 30 minutes
+        if (!string.IsNullOrEmpty(accessToken))
+        {
+            memoryCache.Set(CacheKey, accessToken, TimeSpan.FromMinutes(30));
+        }
+
+        return accessToken;
+
     }
 
     public async Task<List<PlaylistItems>> GetPlaylistsAsync(string accessToken)

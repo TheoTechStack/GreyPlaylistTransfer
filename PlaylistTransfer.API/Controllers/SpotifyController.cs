@@ -23,9 +23,13 @@ public class SpotifyController(SpotifyService spotifyService) : ControllerBase
             return BadRequest("Authorization code is missing.");
         }
         try
-        {
+        { 
+            // Exchange the authorization code for the access token
             var accessToken = await spotifyService.ExchangeCodeForTokenAsync(code);
-            return Ok(new { AccessToken = accessToken });
+
+            // Redirect the user to the playlists page with the access token as a query parameter
+            return Redirect($"http://localhost:5200/playlists?accessToken={accessToken}");
+
         }
         catch (Exception ex)
         {
