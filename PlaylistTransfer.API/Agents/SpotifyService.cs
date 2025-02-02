@@ -89,18 +89,18 @@ public class SpotifyService(SpotifyCredentialsProvider spotifyCredentialsProvide
 
             var detailedPlaylist = await spotifyClient.Playlists.Get(playlistId);
             
-            var playlistTracks = new List<object>();
+            var playlistTracks = new List<Track>();
 
             foreach (var item in detailedPlaylist.Tracks!.Items!)
             {
                 if (item.Track is not FullTrack track) continue;
                 var artistNames = string.Join(", ", track.Artists.Select(artist => artist.Name));
+                var songAlbum = track.Album.Images.Select(image => image.Url).FirstOrDefault();
                 
-                playlistTracks.Add(new
-                {
-                    TrackName = $"{track.Name} by {artistNames}",
-                    TrackUrl = track.ExternalUrls!["spotify"]
-                });
+                playlistTracks.Add(new Track(
+                    $"{track.Name} - {artistNames}", 
+                    track.ExternalUrls!["spotify"],
+                    songAlbum!));
             }
 
             // If there are tracks, add the playlist with its tracks to the result

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jkGcCsC4df27u3kmYP/kynx91TEiIy0BQS9BOXpKLy0=",
+  "Hash": "Jd3rA9htAwH8hf8kpXnpi+bi/QKZ5KVV1iN1Vpq+wno=",
   "Source": "PlaylistTransfer.UI",
   "BasePath": "_content/PlaylistTransfer.UI",
   "Mode": "Default",
@@ -264,6 +264,25 @@
       "OriginalItemSpec": "wwwroot/css/open-iconic/README.md"
     },
     {
+      "Identity": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/wwwroot/css/PlaylistDetails.css",
+      "SourceId": "PlaylistTransfer.UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/wwwroot/",
+      "BasePath": "_content/PlaylistTransfer.UI",
+      "RelativePath": "css/PlaylistDetails.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/PlaylistDetails.css"
+    },
+    {
       "Identity": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/wwwroot/css/site.css",
       "SourceId": "PlaylistTransfer.UI",
       "SourceType": "Discovered",
@@ -281,6 +300,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/site.css"
+    },
+    {
+      "Identity": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/wwwroot/css/YoutubeMusic.css",
+      "SourceId": "PlaylistTransfer.UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/wwwroot/",
+      "BasePath": "_content/PlaylistTransfer.UI",
+      "RelativePath": "css/YoutubeMusic.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/YoutubeMusic.css"
     },
     {
       "Identity": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/wwwroot/favicon.png",

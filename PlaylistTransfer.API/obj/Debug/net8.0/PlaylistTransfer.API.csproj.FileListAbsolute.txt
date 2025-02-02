@@ -84,3 +84,10 @@
 /Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/obj/Debug/net8.0/PlaylistTransfer.API.pdb
 /Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/obj/Debug/net8.0/PlaylistTransfer.API.genruntimeconfig.cache
 /Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/obj/Debug/net8.0/ref/PlaylistTransfer.API.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/bin/Debug/net8.0/Google.Apis.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/bin/Debug/net8.0/Google.Apis.Auth.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/bin/Debug/net8.0/Google.Apis.Core.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/bin/Debug/net8.0/Google.Apis.YouTube.v3.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/bin/Debug/net8.0/System.CodeDom.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/bin/Debug/net8.0/System.Management.dll
+/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.API/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Management.dll

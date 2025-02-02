@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets/PlaylistTransfer.UI.bundle.scp.css"
     },
     {
+      "Id": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/wwwroot/css/PlaylistDetails.css",
+      "PackagePath": "staticwebassets/css/PlaylistDetails.css"
+    },
+    {
+      "Id": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/wwwroot/css/YoutubeMusic.css",
+      "PackagePath": "staticwebassets/css/YoutubeMusic.css"
+    },
+    {
       "Id": "/Users/theoramalatso/Documents/GitHub/GreyPlaylistTransfer/PlaylistTransfer.UI/wwwroot/css/bootstrap/bootstrap.min.css",
       "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css"
     },

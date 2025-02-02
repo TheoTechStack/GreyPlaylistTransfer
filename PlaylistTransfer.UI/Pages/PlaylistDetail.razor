@@ -6,86 +6,49 @@
 @inject NavigationManager Navigation
 
 @code {
-[Parameter]
-public string PlaylistName { get; set; }
+    [Parameter]
+    public string PlaylistName { get; set; }
 
-private PlaylistItems _playlist = new PlaylistItems(string.Empty, new List<object>(), string.Empty);
-private List<string> _songNames = new List<string>();
+    private PlaylistItems _playlist = new PlaylistItems(string.Empty, new List<Track>(), string.Empty);
 
-protected override async Task OnInitializedAsync()
-{
-// Fetch playlist by PlaylistName
-var playlist = PlaylistState.SelectedPlaylists.FirstOrDefault(p => p.PlaylistName == PlaylistName);
-if (playlist != null)
-{
-_playlist = playlist;
-_songNames = playlist.Tracks.Select(track => track.ToString()).ToList(); // Assuming track has a name property
-}
-}
-
-private void GoBackToPlaylists()
-{
-Navigation.NavigateTo("/playlists");
-}
-}
-
-<h3>@_playlist.PlaylistName</h3>
-<img src="@_playlist.Image" alt="@_playlist.PlaylistName" class="playlist-image" />
-<button class="btn btn-secondary" @onclick="GoBackToPlaylists">Back to Playlists</button>
-
-<h4>Songs</h4>
-<div class="song-list">
-    @foreach (var songName in _songNames)
+    protected override async Task OnInitializedAsync()
     {
-    <div class="song-card">
-        <div class="song-image">
-            <!-- Add album image for each song, you can modify it if Tracks has specific images -->
-            <img src="https://via.placeholder.com/50" alt="@songName" />
-        </div>
-        <div class="song-info">
-            <p>@songName</p> <!-- Display song name -->
-            <!-- Optionally add artist name, if available -->
-        </div>
-    </div>
+        var playlist = PlaylistState.SelectedPlaylists.FirstOrDefault(p => p.PlaylistName == PlaylistName);
+        if (playlist != null)
+        {
+            _playlist = playlist;
+        }
     }
+
+    private void GoBackToPlaylists()
+    {
+        Navigation.NavigateTo("/playlists");
+    }
+}
+
+<!-- Back Button as Arrow -->
+<div class="back-container">
+    <button class="back-button" @onclick="GoBackToPlaylists">
+        &#x2190; <!-- Unicode for left arrow -->
+    </button>
 </div>
 
-<style>
-    .song-list {
-        display: flex;
-        overflow-x: auto;
-        padding: 10px 0;
-    }
+<!-- Playlist Details -->
+<div class="playlist-container">
+    <h3>@_playlist.PlaylistName</h3>
+    <img src="@_playlist.Image" alt="@_playlist.PlaylistName" class="playlist-image" />
+</div>
 
-    .song-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-right: 20px;
-        min-width: 100px;
-        text-align: center;
-    }
 
-    .song-image {
-        width: 50px;
-        height: 50px;
-        border-radius: 10px;
-        overflow: hidden;
-        margin-bottom: 5px;
+<div class="song-grid">
+    @foreach (var track in _playlist.Tracks)
+    {
+        <div class="song-card">
+            @if (!string.IsNullOrEmpty(track.SongAlbum))
+            {
+                <img src="@track.SongAlbum" alt="Album Cover" class="song-image"/>
+            }
+            <a href="@track.TrackUrl" target="_blank" class="song-link">@track.TrackName</a>
+        </div>
     }
-
-    .song-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .song-info {
-        font-size: 14px;
-        color: #333;
-    }
-
-    .btn-secondary {
-        margin-top: 15px;
-    }
-</style>
+</div>

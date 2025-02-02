@@ -1,0 +1,39 @@
+@page "/apple-music"
+@using PlaylistTransfer.UI.Data
+@inject PlaylistState playlistState
+
+<!-- Main container with relative positioning -->
+    <h3>List of Playlists to Youtube Music</h3>
+
+    <!-- Button container for absolute positioning -->
+    <div class="youtube-button-container">
+        <button class="btn btn-primary youtube-submit-button" @onclick="PostToYoutubeMusic">Tranfer</button>
+    </div>
+
+    @if (PlaylistState.SelectedPlaylists.Count == 0)
+    {
+        <p>No playlists selected.</p>
+    }
+    else
+    {
+        <div class="youtube-playlist-grid">
+            @foreach (var playlist in PlaylistState.SelectedPlaylists)
+            {
+                <div class="youtube-playlist-card">
+                    <h4>@playlist.PlaylistName</h4>
+                    @if (!string.IsNullOrEmpty(playlist.Image))
+                    {
+                        <img src="@playlist.Image" alt="Playlist Image" class="youtube-playlist-image" />
+                    }
+                </div>
+            }
+        </div>
+    }
+
+@code {
+    private Task PostToYoutubeMusic()
+    {
+        Console.WriteLine("Posting playlists to Apple Music...");
+        return Task.CompletedTask;
+    }
+}

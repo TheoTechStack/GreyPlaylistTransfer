@@ -1,18 +1,11 @@
 namespace PlaylistTransfer.Shared;
 
 //public record PlaylistItems(string? PlaylistName, List<object> Tracks, string? Image,  bool IsSelected = false );
-public class PlaylistItems
+public record Track(string TrackName, string TrackUrl, string SongAlbum);
+public class PlaylistItems(string? playlistName, List<Track> tracks, string? image, bool isSelected = false)
 {
-    public string? PlaylistName { get; set; }
-    public List<object> Tracks { get; set; }
-    public string? Image { get; set; }
-    public bool IsSelected { get; set; }
-
-    public PlaylistItems(string? playlistName, List<object> tracks, string? image, bool isSelected = false)
-    {
-        PlaylistName = playlistName;
-        Tracks = tracks;
-        Image = image;
-        IsSelected = isSelected;
-    }
+    public string? PlaylistName { get; } = playlistName;
+    public List<Track> Tracks { get; } = tracks;
+    public string? Image { get; } = image;
+    public bool IsSelected { get; set; } = isSelected;
 }

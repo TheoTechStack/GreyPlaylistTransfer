@@ -1,0 +1,138 @@
+/* Song grid container */
+.song-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(150px, 1fr)); /* 5 per row on larger screens */
+    gap: 20px;
+    padding: 20px;
+    justify-content: center; /* Centers the grid horizontally */
+    max-width: 800px; /* Prevents it from taking up the whole screen */
+    margin: 0 auto; /* Ensures it stays centered */
+}
+
+/* Song card layout */
+.song-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Album cover styling */
+.song-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Song link styling */
+.song-link {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.song-link:hover {
+    text-decoration: underline;
+}
+
+/* Playlist container styles */
+.playlist-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers items horizontally */
+    justify-content: center; /* Centers items vertically */
+    text-align: center;
+    min-height: 50vh; /* Ensures it has enough height to center content */
+    width: 100%; /* Ensures it stretches across the full width */
+}
+
+/* Playlist image styling */
+.playlist-image {
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* Responsive: Show 2 per row on mobile */
+@media (max-width: 768px) {
+    /* Adjusting the song grid for mobile */
+    .song-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 per row on mobile */
+    }
+
+    /* Adjust playlist container layout on mobile */
+    .playlist-container {
+        min-height: 50vh;
+    }
+
+    /* Playlist image styling on mobile */
+    .playlist-image {
+        max-width: 150px; /* Adjust the image size on mobile */
+    }
+
+    /* Back button container */
+    .back-container {
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px;
+    }
+
+    /* Styled Back Button */
+    .back-button {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #333;
+    }
+
+    .back-button:hover {
+        color: #007bff;
+    }
+
+    /* Song list container for horizontal scroll on mobile */
+    .song-list {
+        display: flex;
+        overflow-x: auto;
+        padding: 10px 0;
+    }
+
+    /* Song card layout for mobile */
+    .song-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 20px;
+        min-width: 100px;
+        text-align: center;
+    }
+
+    /* Song image size for mobile */
+    .song-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 5px;
+    }
+
+    .song-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .song-info {
+        font-size: 14px;
+        color: #333;
+    }
+}
+
