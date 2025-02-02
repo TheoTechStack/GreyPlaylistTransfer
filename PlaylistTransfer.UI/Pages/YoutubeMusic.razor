@@ -1,6 +1,8 @@
-@page "/apple-music"
+@page "/youtube-music"
 @using PlaylistTransfer.UI.Data
 @inject PlaylistState playlistState
+@inject HttpClient Http
+@inject NavigationManager Navigation
 
 <!-- Main container with relative positioning -->
     <h3>List of Playlists to Youtube Music</h3>
@@ -31,9 +33,68 @@
     }
 
 @code {
-    private Task PostToYoutubeMusic()
-    {
-        Console.WriteLine("Posting playlists to Apple Music...");
-        return Task.CompletedTask;
+        private async Task PostToYoutubeMusic()
+        {
+            try
+            {
+                await AuthorizeWithYoutubeAsync();
+                var request = new HttpRequestMessage(HttpMethod.Post, "api/youtube/create-playlists-and-add-videos")
+                {
+                    Content = JsonContent.Create(PlaylistState.SelectedPlaylists) // Serializes the playlists
+                };
+
+                var response = await Http.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var message = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Success: {message}");
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Error: {response.StatusCode}, {errorMessage}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+            }
     }
+
+        private async Task AuthorizeWithYoutubeAsync()
+        {
+            try
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, "/api/youtube/authenticate");
+                var response = await Http.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse>();
+
+                    if (!string.IsNullOrEmpty(authResponse?.Url))
+                    {
+                        Navigation.NavigateTo(authResponse.Url, true); // Redirect user to Youtube login
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: Spotify auth URL is empty.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Error fetching Spotify auth URL: {response.StatusCode}");
+                }
+    
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching Spotify auth URL: {ex.Message}");
+            }
+        }
+        private class AuthResponse
+        {
+            public string Url { get; set; }
+        }
 }

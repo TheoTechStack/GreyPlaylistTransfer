@@ -5,6 +5,8 @@ using Google.Apis.YouTube.v3;
 using Google.Apis.YouTube.v3.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using PlaylistTransfer.Shared;
+using Playlist = Google.Apis.YouTube.v3.Data.Playlist;
 
 namespace PlaylistTransfer.API.Controllers;
 
@@ -15,8 +17,9 @@ public class YoutubePlaylistController(IMemoryCache memoryCache) : ControllerBas
     private readonly IMemoryCache _memoryCache = memoryCache;
     private const string YouTubeServiceKey = "YouTubeService";
 
-    [HttpPost("create-playlist-add-video")]
-    public async Task<IActionResult> CreatePlaylistAndAddVideo([FromQuery] string playlistTitle, [FromQuery] string playlistDescription, [FromQuery] string videoTitle)
+    [Obsolete]
+    [HttpPost("create-playlist-add-video1")]
+    public async Task<IActionResult> CreatePlaylistAndAddVideo1([FromQuery] string playlistTitle, [FromQuery] string playlistDescription, [FromQuery] string videoTitle)
     {
         if (!_memoryCache.TryGetValue(YouTubeServiceKey, out YouTubeService youtubeService))
         {
@@ -32,9 +35,50 @@ public class YoutubePlaylistController(IMemoryCache memoryCache) : ControllerBas
         if (string.IsNullOrEmpty(videoId)) return NotFound("Video not found");
 
         // Add video to playlist
-        await AddVideoToPlaylist(youtubeService, playlist.Id, videoId);
+        await AddVideoToPlaylistAsync(youtubeService, playlist.Id, videoId);
         return Ok($"Video '{videoTitle}' added to playlist '{playlistTitle}'");
     }
+    
+    [HttpPost("create-playlists-and-add-videos")]
+    public async Task<IActionResult> CreatePlaylistsAndAddVideos([FromBody] List<PlaylistItems> playlists)
+    {
+        if (!_memoryCache.TryGetValue(YouTubeServiceKey, out YouTubeService youtubeService))
+        {
+            return Unauthorized("YouTube service not found. Please authenticate first.");
+        }
+
+        var responseMessages = new List<string>();
+
+        foreach (var playlist in playlists)
+        {
+            // Create or get existing playlist
+            var createdPlaylist = await CreateOrGetPlaylist(youtubeService, playlist.PlaylistName, "");
+            if (createdPlaylist == null)
+            {
+                responseMessages.Add($"Failed to create or retrieve playlist '{playlist.PlaylistName}'");
+                continue;
+            }
+
+            // Get video IDs for all tracks in the playlist
+            var videoIds = await GetVideoIdsByTitles(youtubeService, playlist.Tracks);
+            if (videoIds.Count == 0)
+            {
+                responseMessages.Add($"No valid videos found for playlist '{playlist.PlaylistName}'");
+                continue;
+            }
+
+            // Add valid videos to the playlist
+            foreach (var (_, videoId) in videoIds)
+            {
+                await AddVideoToPlaylistAsync(youtubeService, createdPlaylist.Id, videoId);
+            }
+
+            responseMessages.Add($"Added videos: {string.Join(", ", videoIds.Keys)} to playlist '{playlist.PlaylistName}'");
+        }
+
+        return Ok(responseMessages);
+    }
+    
 
     private async Task<UserCredential> GetUserCredentialAsync()
     {
@@ -63,6 +107,21 @@ public class YoutubePlaylistController(IMemoryCache memoryCache) : ControllerBas
         }
 
         return credential;
+    }
+    private async Task<Dictionary<string, string>> GetVideoIdsByTitles(YouTubeService youtubeService, List<Track> tracks)
+    {
+        var videoIds = new Dictionary<string, string>();
+
+        foreach (var track in tracks)
+        {
+            var videoId = await GetVideoIdByTitle(youtubeService, track.TrackName);
+            if (!string.IsNullOrEmpty(videoId))
+            {
+                videoIds[track.TrackName] = videoId;
+            }
+        }
+
+        return videoIds;
     }
 
     private async Task<Playlist> CreateOrGetPlaylist(YouTubeService youtubeService, string title, string description)
@@ -118,7 +177,7 @@ public class YoutubePlaylistController(IMemoryCache memoryCache) : ControllerBas
             return bestMatch?.Id.VideoId!;
         }
 
-        private async Task AddVideoToPlaylist(YouTubeService youtubeService, string playlistId, string videoId)
+        private async Task AddVideoToPlaylistAsync(YouTubeService youtubeService, string playlistId, string videoId)
         {
             var searchRequest = youtubeService.PlaylistItems.List("snippet");
             searchRequest.PlaylistId = playlistId;

@@ -66,8 +66,7 @@ public class YouTubeCallbackController(IMemoryCache memoryCache) : ControllerBas
 
             // Store in-memory cache
             memoryCache.Set(YouTubeServiceKey, youtubeService, TimeSpan.FromMinutes(50));
-
-            return Ok("Authentication successful");
+            return Redirect($"http://localhost:5200/youtube-music");
         }
         catch (Exception e)
         {
