@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Util;
@@ -153,7 +154,8 @@ public class YoutubePlaylistController(IMemoryCache memoryCache) : ControllerBas
         return results!;
     }
 
-    private async Task<string> GetVideoIdByTitle(YouTubeService youtubeService, string title)
+    [Obsolete]
+    private async Task<string> GetVideoIdByTitle2(YouTubeService youtubeService, string title)
         {
             var searchRequest = youtubeService.Search.List("snippet");
             searchRequest.Q = title;
@@ -177,6 +179,50 @@ public class YoutubePlaylistController(IMemoryCache memoryCache) : ControllerBas
             return bestMatch?.Id.VideoId!;
         }
 
+    private async Task<string> GetVideoIdByTitle(YouTubeService youtubeService, string title)
+    {
+        var searchRequest = youtubeService.Search.List("snippet");
+        searchRequest.Q = title;
+        searchRequest.Type = "video";
+        searchRequest.MaxResults = 10; // Increase results for better accuracy
+        var searchResponse = await searchRequest.ExecuteAsync();
+
+        var normalizedTitle = NormalizeText(title);
+
+        var bestMatch = searchResponse.Items.MaxBy(v => GetSimilarity(normalizedTitle, NormalizeText(v.Snippet.Title)));
+
+        return bestMatch?.Id.VideoId!;
+    }
+
+    private string NormalizeText(string text)
+    {
+        if (string.IsNullOrEmpty(text)) return string.Empty;
+        text = text.ToLower();
+        text = Regex.Replace(text, @"[^\w\s]", ""); // Remove special characters
+        return text.Trim();
+    }
+
+    private int GetSimilarity(string s1, string s2)
+    {
+        if (string.IsNullOrEmpty(s1) || string.IsNullOrEmpty(s2)) return 0;
+
+        int[,] dp = new int[s1.Length + 1, s2.Length + 1];
+
+        for (int i = 0; i <= s1.Length; i++)
+        {
+            for (int j = 0; j <= s2.Length; j++)
+            {
+                if (i == 0 || j == 0)
+                    dp[i, j] = i + j;
+                else if (s1[i - 1] == s2[j - 1])
+                    dp[i, j] = dp[i - 1, j - 1];
+                else
+                    dp[i, j] = 1 + Math.Min(dp[i - 1, j - 1], Math.Min(dp[i - 1, j], dp[i, j - 1]));
+            }
+        }
+
+        return dp[s1.Length, s2.Length]; // Levenshtein Distance (Lower is better)
+    }
         private async Task AddVideoToPlaylistAsync(YouTubeService youtubeService, string playlistId, string videoId)
         {
             var searchRequest = youtubeService.PlaylistItems.List("snippet");
