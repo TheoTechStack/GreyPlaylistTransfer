@@ -5,68 +5,35 @@ using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using PlaylistTransfer.API.Agents;
 
 namespace PlaylistTransfer.API.Controllers;
 
 [Route("api/youtube")]
 [ApiController]
-public class YouTubeAuthController : ControllerBase
+public class YouTubeAuthController(YouTubeAgent youTubeAgent) : ControllerBase
 {
-    private static readonly string RedirectUri = "http://localhost:5095/api/youtube/callback";
-    public static GoogleAuthorizationCodeFlow Flow;
-
-    static YouTubeAuthController()
-    {
-        var clientSecrets = new ClientSecrets
-        {
-            ClientId = "279852309211-g83if6aar36jl7ggtj20ocsi15ibehbd.apps.googleusercontent.com",
-            ClientSecret = "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"
-        };
-
-        Flow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
-        {
-            ClientSecrets = clientSecrets,
-            Scopes = new[] { YouTubeService.Scope.Youtube }
-        });
-    }
-
     [HttpGet("authenticate")]
     public IActionResult Authenticate()
     {
-        string authUrl = Flow.CreateAuthorizationCodeRequest(RedirectUri).Build().AbsoluteUri;
+        string authUrl = youTubeAgent.GetAuthenticationUrl();
         return Ok(new { Url = authUrl });
     }
 }
 
 [Route("api/youtube")]
 [ApiController]
-public class YouTubeCallbackController(IMemoryCache memoryCache) : ControllerBase
+public class YouTubeCallbackController(YouTubeAgent youTubeAgent) : ControllerBase
 {
-    private const string YouTubeServiceKey = "YouTubeService";
+    private readonly YouTubeAgent _youTubeAgent = youTubeAgent;
 
     [HttpGet("callback")]
     public async Task<IActionResult> Callback([FromQuery] string code)
     {
         try
         {
-            if (string.IsNullOrEmpty(code)) return BadRequest("Authorization code missing");
-
-            var tokenResponse = await YouTubeAuthController.Flow.ExchangeCodeForTokenAsync(
-                "user",
-                code,
-                "http://localhost:5095/api/youtube/callback",
-                CancellationToken.None);
-
-            var credential = new UserCredential(YouTubeAuthController.Flow, "user", tokenResponse);
-            var youtubeService = new YouTubeService(new BaseClientService.Initializer
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = "YouTubeAPIApp"
-            });
-
-            // Store in-memory cache
-            memoryCache.Set(YouTubeServiceKey, youtubeService, TimeSpan.FromMinutes(50));
-            return Redirect($"http://localhost:5200/youtube-music");
+            var redirectUrl = await _youTubeAgent.HandleCallbackAsync(code);
+            return Redirect(redirectUrl);
         }
         catch (Exception e)
         {
