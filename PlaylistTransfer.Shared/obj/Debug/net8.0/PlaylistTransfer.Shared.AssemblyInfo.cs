@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PlaylistTransfer.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f93ecd698cf75ad0d41379fda770eec6355d14fa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aeff7f08c810e90bc48980a7da63fb307073ca6c")]
 [assembly: System.Reflection.AssemblyProductAttribute("PlaylistTransfer.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PlaylistTransfer.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

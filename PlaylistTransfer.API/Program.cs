@@ -8,7 +8,7 @@ builder.Services.AddSingleton(_ =>
     new AzureKeyVaultService(builder.Configuration["AzureKeyVaultUri"]));
 builder.Services.AddScoped<SpotifyCredentialsProvider>();
 builder.Services.AddScoped<SpotifyService>();
-builder.Services.AddScoped<YouTubeAgent>();
+builder.Services.AddScoped<IYouTubeAgent, YouTubeAgent>();
 builder.Services.AddHttpClient();
 
 builder.Services.AddEndpointsApiExplorer();
