@@ -1,3 +1,8 @@
+#Docker
+GreyPlaylistTransfer % docker build -t playlisttransfer-ui -f PlaylistTransfer.UI/Dockerfile .
+
+GreyPlaylistTransfer % docker run -d -p 8080:80 --name playlisttransfer-ui-container playlisttransfer-ui
+
 <img width="1440" alt="Screenshot 2025-03-02 at 21 58 34" src="https://github.com/user-attachments/assets/506fc8f6-420b-42e8-a10e-96691cc3fe41" />
 <img width="1440" alt="Screenshot 2025-03-02 at 21 58 34 1" src="https://github.com/user-attachments/assets/6f441c03-892e-40a1-96bd-315ed0a119a3" />
 <img width="1440" alt="Screenshot 2025-03-02 at 21 59 07" src="https://github.com/user-attachments/assets/d8b4a943-37b6-4ff6-932f-3e94817b7bdb" />
