@@ -1,7 +1,17 @@
-#Docker
-GreyPlaylistTransfer % docker build -t playlisttransfer-ui -f PlaylistTransfer.UI/Dockerfile .
+# Playlist Transfer UI - Docker Guide
 
-GreyPlaylistTransfer % docker run -d -p 8080:80 --name playlisttransfer-ui-container playlisttransfer-ui
+This guide provides instructions on how to build and run the `PlaylistTransfer.UI` application using Docker.
+
+## Building the Docker Image
+
+To build the Docker image, run the following command from the root directory of the project:
+
+```sh
+docker build -t playlisttransfer-ui -f PlaylistTransfer.UI/Dockerfile .
+```
+```sh
+docker run -d -p 8080:80 --name playlisttransfer-ui-container playlisttransfer-ui
+```
 
 <img width="1440" alt="Screenshot 2025-03-02 at 21 58 34" src="https://github.com/user-attachments/assets/506fc8f6-420b-42e8-a10e-96691cc3fe41" />
 <img width="1440" alt="Screenshot 2025-03-02 at 21 58 34 1" src="https://github.com/user-attachments/assets/6f441c03-892e-40a1-96bd-315ed0a119a3" />
