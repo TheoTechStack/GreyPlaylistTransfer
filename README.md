@@ -10,7 +10,7 @@ To build the Docker image, run the following command from the root directory of 
 docker build -t playlisttransfer-ui -f PlaylistTransfer.UI/Dockerfile .
 ```
 ```sh
-docker run -d -p 8080:80 --name playlisttransfer-ui-container playlisttransfer-ui
+docker run -d -p 8080:8080 --name playlisttransfer-ui-container playlisttransfer-ui
 ```
 
 <img width="1440" alt="Screenshot 2025-03-02 at 21 58 34" src="https://github.com/user-attachments/assets/506fc8f6-420b-42e8-a10e-96691cc3fe41" />
