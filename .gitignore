@@ -484,3 +484,7 @@ $RECYCLE.BIN/
 *.swp
 *.dll
 *.cache
+*.cs
+*.cs
+PlaylistTransfer.API/obj/Debug/net8.0/PlaylistTransfer.API.sourcelink.json
+*.cache

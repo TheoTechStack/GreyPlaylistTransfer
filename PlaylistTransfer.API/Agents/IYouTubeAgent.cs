@@ -7,7 +7,7 @@ namespace PlaylistTransfer.API.Agents
 {
     public interface IYouTubeAgent
     {
-        string GetAuthenticationUrl();
+        Task<string> GetAuthenticationUrl();
         Task<string> HandleCallbackAsync(string code);
         Task<string> CreatePlaylistAndAddVideoAsync(string playlistTitle, string playlistDescription, string videoTitle);
         Task<List<string>> CreatePlaylistsAndAddVideosAsync(List<PlaylistItems> playlists);

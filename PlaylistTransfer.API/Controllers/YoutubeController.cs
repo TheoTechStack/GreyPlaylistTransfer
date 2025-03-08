@@ -7,9 +7,9 @@ namespace PlaylistTransfer.API.Controllers;
 public class YouTubeAuthController(IYouTubeAgent youTubeAgent) : ControllerBase
 {
     [HttpGet("authenticate")]
-    public IActionResult Authenticate()
+    public async Task<IActionResult> Authenticate()
     {
-        var authUrl = youTubeAgent.GetAuthenticationUrl();
+        var authUrl =  await youTubeAgent.GetAuthenticationUrl();
         return Ok(new { Url = authUrl });
     }
 }

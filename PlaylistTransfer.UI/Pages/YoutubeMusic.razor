@@ -38,6 +38,7 @@
             try
             {
                 await AuthorizeWithYoutubeAsync();
+                await Task.Delay(3000);
                 var request = new HttpRequestMessage(HttpMethod.Post, "api/youtube/create-playlists-and-add-videos")
                 {
                     Content = JsonContent.Create(PlaylistState.SelectedPlaylists) // Serializes the playlists
