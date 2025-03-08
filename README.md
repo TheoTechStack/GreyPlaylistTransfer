@@ -12,6 +12,14 @@ docker build -t playlisttransfer-ui -f PlaylistTransfer.UI/Dockerfile .
 ```sh
 docker run -d -p 8080:8080 --name playlisttransfer-ui-container playlisttransfer-ui
 ```
+```sh
+docker build -t playlisttransfer-api -f PlaylistTransfer.API/Dockerfile .
+```
+
+```sh
+docker run -d -p 5001:8080 --name playlisttransfer-api-container playlisttransfer-api
+```
+`http://localhost:5001/swagger/index.html`
 
 <img width="1440" alt="Screenshot 2025-03-02 at 21 58 34" src="https://github.com/user-attachments/assets/506fc8f6-420b-42e8-a10e-96691cc3fe41" />
 <img width="1440" alt="Screenshot 2025-03-02 at 21 58 34 1" src="https://github.com/user-attachments/assets/6f441c03-892e-40a1-96bd-315ed0a119a3" />
